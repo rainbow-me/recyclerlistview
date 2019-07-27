@@ -32,6 +32,7 @@ export default abstract class StickyObject<P extends StickyObjectProps, S extend
     protected stickyType: StickyType = StickyType.HEADER;
     protected stickyTypeMultiplier: number = 1;
     protected stickyVisiblity: boolean = false;
+    protected visibility: boolean = false;
     protected containerPosition: StyleProp<ViewStyle>;
     protected currentIndex: number = 0;
     protected currentStickyIndex: number = 0;
@@ -64,7 +65,7 @@ export default abstract class StickyObject<P extends StickyObjectProps, S extend
     constructor(props: P, context?: any) {
         super(props, context);
         this.state = {
-            visible: this.stickyVisiblity,
+            visible: true,
         } as S;
     }
 
@@ -82,7 +83,7 @@ export default abstract class StickyObject<P extends StickyObjectProps, S extend
                 {position: "absolute", width: this._scrollableWidth, transform: [{translateY: this._stickyViewOffset}]},
                 this.containerPosition,
             ]}>
-                {this.state.visible ?
+                {this.visibility ?
                     this._renderSticky()
                 : null}
             </Animated.View>
@@ -103,6 +104,15 @@ export default abstract class StickyObject<P extends StickyObjectProps, S extend
     }
 
     public onScroll(offsetY: number): void {
+        const prevVisibility = this.visibility;
+        if(offsetY < 0 && prevVisibility == true || this._smallestVisibleIndex < this.currentStickyIndex) {
+            this.visibility = false;
+        } else if (offsetY >= 0 && prevVisibility == false) {
+            this.visibility = true;
+        }
+        if(prevVisibility !== this.visibility) {
+            this.render();
+        }
         this._initParams();
         this._offsetY = offsetY;
         this.boundaryProcessing(offsetY, this.props.getDistanceFromWindow(), this._windowBound);
