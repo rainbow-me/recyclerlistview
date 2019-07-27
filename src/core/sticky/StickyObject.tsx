@@ -105,12 +105,12 @@ export default abstract class StickyObject<P extends StickyObjectProps, S extend
 
     public onScroll(offsetY: number): void {
         const prevVisibility = this.visibility;
-        if(offsetY < 0 && prevVisibility == true || this._smallestVisibleIndex < this.currentStickyIndex) {
+        if (offsetY < 0 && prevVisibility === true || this._smallestVisibleIndex < this.currentStickyIndex) {
             this.visibility = false;
-        } else if (offsetY >= 0 && prevVisibility == false) {
+        } else if (offsetY >= 0 && prevVisibility === false) {
             this.visibility = true;
         }
-        if(prevVisibility !== this.visibility) {
+        if (prevVisibility !== this.visibility) {
             this.render();
         }
         this._initParams();

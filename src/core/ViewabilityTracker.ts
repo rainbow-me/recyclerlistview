@@ -103,7 +103,7 @@ export default class ViewabilityTracker {
     public findFirstLogicallyVisibleIndex(): number {
         const relevantIndex = this._findFirstVisibleIndexUsingBS(0.001);
         let result = relevantIndex;
-        console.log('public findFirstLogicallyVisibleIndex this._layouts', this._layouts);
+        console.log("public findFirstLogicallyVisibleIndex this._layouts", this._layouts);
         for (let i = relevantIndex - 1; i >= 0; i--) {
             if (this._isHorizontal) {
                 if (this._layouts[relevantIndex].x !== this._layouts[i].x) {
@@ -160,7 +160,7 @@ export default class ViewabilityTracker {
 
     //TODO:Talha switch to binary search and remove atleast once logic in _fitIndexes
     private _findFirstVisibleIndexLinearly(): number {
-        console.log('private _findFirstVisibleIndexLinearly this._layouts', this._layouts);
+        console.log("private _findFirstVisibleIndexLinearly this._layouts", this._layouts);
         const count = this._layouts.length;
         let itemRect = null;
         const relevantDim = { start: 0, end: 0 };
@@ -182,8 +182,8 @@ export default class ViewabilityTracker {
 
     private _valueExtractorForBinarySearch = (index: number): number => {
         const itemRect = this._layouts[index];
-        console.log('private _valueExtractorForBinarySearch index', index);
-        console.log('private _valueExtractorForBinarySearch itemRect', itemRect);
+        console.log("private _valueExtractorForBinarySearch index", index);
+        console.log("private _valueExtractorForBinarySearch itemRect", itemRect);
         this._setRelevantBounds(itemRect, this._relevantDim);
         return this._relevantDim.end;
     }
@@ -226,7 +226,7 @@ export default class ViewabilityTracker {
                                         newEngagedIndexes: number[]): boolean {
         const itemRect = this._layouts[index];
         let isFound = false;
-        console.log('private _checkIntersectionAndReport index, this._layouts', index, this._layouts);
+        console.log("private _checkIntersectionAndReport index, this._layouts", index, this._layouts);
         this._setRelevantBounds(itemRect, relevantDim);
         if (this._itemIntersectsVisibleWindow(relevantDim.start, relevantDim.end)) {
             if (insertOnTop) {
@@ -251,7 +251,7 @@ export default class ViewabilityTracker {
     }
 
     private _setRelevantBounds(itemRect: Layout, relevantDim: Range): void {
-        console.log('private _setRelevantBounds itemRect', itemRect);
+        console.log("private _setRelevantBounds itemRect", itemRect);
         if (this._isHorizontal) {
             relevantDim.end = itemRect.x + itemRect.width;
             relevantDim.start = itemRect.x;

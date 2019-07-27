@@ -67,7 +67,7 @@ export class WrapGridLayoutManager extends LayoutManager {
     }
 
     public getOffsetForIndex(index: number): Point {
-        console.log('public getOffsetForIndex index, this._layouts', index, this._layouts);
+        console.log("public getOffsetForIndex index, this._layouts", index, this._layouts);
         if (this._layouts.length > index) {
             return { x: this._layouts[index].x, y: this._layouts[index].y };
         } else {
@@ -102,7 +102,7 @@ export class WrapGridLayoutManager extends LayoutManager {
         let startX = 0;
         let startY = 0;
         let maxBound = 0;
-        console.log('private _locateFirstNeighbourIndex startIndex, this._layouts', startIndex, this._layouts);
+        console.log("private _locateFirstNeighbourIndex startIndex, this._layouts", startIndex, this._layouts);
         const startVal = this._layouts[startIndex];
 
         if (startVal) {

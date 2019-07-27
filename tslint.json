@@ -19,6 +19,7 @@
         "variable-name": false,
         "comment-format": false,
         "no-bitwise": false,
+        "no-console": false,
         "member-access": true,
         "ordered-imports": false,
         "object-literal-sort-keys": false
